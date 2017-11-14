@@ -11,7 +11,7 @@ def create_app(**config_overrides):
     app.config.update(config_overrides)
     mongolab_uri = os.getenv('MONGOLAB_URI')
 
-    db.connect('fakebook36',mongolab_uri)
+    #db.connect('fakebook36',mongolab_uri)
     db.init_app(app)
     
     from user.views import user_app
