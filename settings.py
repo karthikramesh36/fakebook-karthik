@@ -9,6 +9,5 @@ AWS_BUCKET = 'fakebookbackend'
 AWS_CONTENT_URL = 'https://s3-us-west-2.amazonaws.com'
 MONGODB_HOST = 'ds159235.mlab.com/fakebook36'
 MONGODB_PORT = 59235
-MONGODB_DATABASE = 'fakebook36'
 MONGODB_USERNAME = 'fakebookadmin'
 MONGODB_PASSWORD = 'peace'
