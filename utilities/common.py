@@ -9,7 +9,7 @@ def email(to_email, subject, body_html, body_text):
     if current_app.config.get('TESTING'):
         return False
         
-    client = boto3.client('ses')
+    client = boto3.client('ses',region_name='us-west-2')
     return client.send_email(
         Source='karthk.floyd@gmail.com',
             Destination={
