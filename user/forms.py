@@ -7,6 +7,10 @@ from flask_wtf.file import FileField, FileAllowed
 import re
 
 from user.models import User
+# register form inherits from baseuserform
+#passwordresetform inherits from passwordbaseform   
+
+# forms validate the input given by user to current real world standards
 
 class BaseUserForm(Form):
     first_name = StringField('First Name', [validators.DataRequired()])
@@ -24,7 +28,7 @@ class BaseUserForm(Form):
         widget=TextArea(),
         validators=[validators.Length(max=160)]
     )
-        
+    
 class PasswordBaseForm(Form):
     password = PasswordField('New Password', [
         validators.DataRequired(),

@@ -2,9 +2,13 @@ import time
 import boto3
 from flask import current_app
 
+"""find the current time to store it as image file name so that each file
+    has a different name and can be differentiated through time"""
 def utc_now_ts():
     return int(time.time())
     
+""" function to send out emails from AWS ses from authorized admin account"""
+
 def email(to_email, subject, body_html, body_text):
     if current_app.config.get('TESTING') or not current_app.config.get('AWS_SEND_MAIL'):
         return False

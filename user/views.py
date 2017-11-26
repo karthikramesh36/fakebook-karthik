@@ -13,6 +13,12 @@ from relationship.models import Relationship
 from user.decorators import login_required
 
 user_app = Blueprint('user_app', __name__)
+
+""" function to register a new user 
+    get input from user into the register form
+    validate the input fields accordingly, encrypt password
+    upon completion send confirmation email to user 
+    final step save into database """
     
 @user_app.route('/register', methods=('GET', 'POST'))
 def register():
@@ -41,6 +47,9 @@ def register():
         user.save()
         return "User registered"
     return render_template('user/register.html', form=form)
+
+""" function to login a user into fakebook
+    store input data into login form """
     
 @user_app.route('/login', methods=('GET', 'POST'))
 def login():
@@ -49,7 +58,7 @@ def login():
     
     if request.method == 'GET' and request.args.get('next'):
         session['next'] = request.args.get('next')
-        
+    # validate user credentials by checking with database    
     if form.validate_on_submit():
         user = User.objects.filter(
             username=form.username.data
@@ -74,6 +83,8 @@ def logout():
     session.pop('username')
     return redirect(url_for('user_app.login'))
 
+""" function to manage the profile and feed  of user 
+    still under progression"""
 @user_app.route('/<username>/friends/<int:page>', endpoint='profile-friends-page')
 @user_app.route('/<username>/friends', endpoint='profile-friends')    
 @user_app.route('/<username>')
@@ -112,7 +123,9 @@ def profile(username, page=1):
             )
     else:
         abort(404)
-        
+
+""" function to edit the credentials of the logged in user"""
+    
 @user_app.route('/edit', methods=('GET', 'POST'))
 @login_required
 def edit():
@@ -165,7 +178,7 @@ def edit():
         return render_template("user/edit.html", form=form, error=error, message=message, user=user)
     else:
         abort(404)
-        
+""" function to display profile of another user through the logged in user"""        
 @user_app.route('/confirm/<username>/<code>', methods=('GET', 'POST'))
 def confirm(username, code):
     user = User.objects.filter(username=username).first()
@@ -178,7 +191,7 @@ def confirm(username, code):
             return render_template('user/email_confirmed.html')
     else:
         abort(404)
-     
+""" function to facilitate user to update credentials if "FORGOT PASSWORD". """     
 @user_app.route('/forgot', methods=('GET', 'POST'))
 def forgot():
     error = None

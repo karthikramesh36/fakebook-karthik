@@ -16,13 +16,14 @@ def thumbnail_process(file, content_type, content_id, sizes=[("sm", 50), ("lg", 
         img.format = 'png'
         img.save(filename=os.path.join(UPLOAD_FOLDER, content_type, filename_template % (image_id, 'raw')))
         
-    # sizes
+    # storage in multiple sizes for later use
     for (name, size) in sizes:
         with Image(filename=file) as img:
             crop_center(img)
             img.sample(size, size)
             img.format = 'png'
             img.save(filename=os.path.join(UPLOAD_FOLDER, content_type, filename_template % (image_id, name)))
+    # if bucket present store in bucket
     if AWS_BUCKET:
         s3 = boto3.client('s3')
         transfer = S3Transfer(s3)
