@@ -22,15 +22,23 @@ class Relationship(db.Document):
         (APPROVED, 'Approved'),
         )
         
-    from_user = db.ReferenceField(User, db_field='fu', reverse_delete_rule=CASCADE)
-    to_user = db.ReferenceField(User, db_field='tu', reverse_delete_rule=CASCADE)
+    from_user = db.ReferenceField(User, db_field='fu', reversed_delete_rule=CASCADE)
+    to_user = db.ReferenceField(User, db_field='tu', reversed_delete_rule=CASCADE)
     rel_type = db.IntField(db_field='rt', choices=RELATIONSHIP_TYPE)
     status = db.IntField(db_field='s', choices=STATUS_TYPE)
     req_date = db.IntField(db_field='rd', default=now())
     approved_date = db.IntField(db_field="ad", default=0)
     
+    def is_friend(self, user):
+        if user:
+            return self.get_relationship(user, self.to_user)
+        else:
+            return None
+
     @staticmethod
     def get_relationship(from_user, to_user):
+        if from_user == to_user:
+            return 'SAME'
         rel = Relationship.objects.filter(
             from_user=from_user,
             to_user=to_user

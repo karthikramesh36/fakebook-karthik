@@ -6,7 +6,7 @@ def utc_now_ts():
     return int(time.time())
     
 def email(to_email, subject, body_html, body_text):
-    if current_app.config.get('TESTING'):
+    if current_app.config.get('TESTING') or not current_app.config.get('AWS_SEND_MAIL'):
         return False
         
     client = boto3.client('ses',region_name='us-west-2')
