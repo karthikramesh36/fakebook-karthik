@@ -1,0 +1,4 @@
+A social web app that allows user to register \& connect/interact with other users supported scalable feed built upon Flask Framework in python.
+MongoDB with MongoLabs is used for backend database management to process user credentials,posts,relationship with other users.
+App is integrated with AWS where SES used for email distribution upon user notifications, Amazon S3 server used to handle numerous images.
+Heroku used as platform deploy builds and to host live website
