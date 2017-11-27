@@ -11,4 +11,4 @@ MONGODB_SETTINGS = {
     'db': 'fakebook36',
     'host': 'mongodb://fakebookadmin:peace@ds159235.mlab.com:59235/fakebook36'
 }
-AWS_SEND_MAIL = False
+AWS_SEND_MAIL = True
