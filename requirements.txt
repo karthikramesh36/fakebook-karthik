@@ -12,5 +12,5 @@ Arrow==0.8.0
 bleach==1.4.3
 chardet==2.2.1
 colorama==0.2.5
-html5lib==0.999
+html5lib==0.999999999
 pycurl==7.19.3
